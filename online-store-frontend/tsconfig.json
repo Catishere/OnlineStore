@@ -1,0 +1,15 @@
+﻿{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "target": "ES5",
+        "baseUrl": "src",
+        "paths": {
+            "@/*": [
+                "app/*"
+            ]
+        }
+    }
+}

@@ -1,0 +1,9 @@
+﻿<h1>Hi {{currentClient.firstName}}!</h1>
+<p>You're logged in with Angular 8!!</p>
+<h3>All registered clients:</h3>
+<ul>
+    <li *ngFor="let client of clients">
+        {{client.username}} ({{client.firstName}} {{client.lastName}})
+        - <a (click)="deleteClient(client.id)" class="text-danger">Delete</a>
+    </li>
+</ul>
