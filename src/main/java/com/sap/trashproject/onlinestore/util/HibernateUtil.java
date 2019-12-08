@@ -1,6 +1,6 @@
 package com.sap.trashproject.onlinestore.util;
 
-import com.sap.trashproject.onlinestore.entity.Client;
+import com.sap.trashproject.onlinestore.entity.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +13,7 @@ public class HibernateUtil {
         try {
             Configuration configuration = new Configuration();
             configuration
-                    .addAnnotatedClass(Client.class)
+                    .addAnnotatedClass(User.class)
                     .configure();
 
             ourSessionFactory = configuration.buildSessionFactory();

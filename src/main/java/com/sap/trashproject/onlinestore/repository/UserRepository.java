@@ -1,15 +1,18 @@
 package com.sap.trashproject.onlinestore.repository;
 
-import com.sap.trashproject.onlinestore.entity.Client;
+import com.sap.trashproject.onlinestore.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.sap.trashproject.onlinestore.util.HibernateUtil;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Optional;
 
-public class ClientRepository implements IClientRepository {
+@Repository
+public class UserRepository {
     private Session currentSession;
     private Transaction currentTransaction;
 
@@ -49,29 +52,37 @@ public class ClientRepository implements IClientRepository {
         this.currentTransaction = currentTransaction;
     }
 
-    @Override
-    public List<Client> findAll() {
+    public List<User> findAll() {
         CriteriaBuilder builder = currentSession.getCriteriaBuilder();
-        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
-        criteria.from(Client.class);
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        criteria.from(User.class);
         return currentSession.createQuery(criteria).getResultList();
     }
 
-    @Override
     public Long count() {
         CriteriaBuilder qb = currentSession.getCriteriaBuilder();
         CriteriaQuery<Long> cq = qb.createQuery(Long.class);
-        cq.select(qb.count(cq.from(Client.class)));
+        cq.select(qb.count(cq.from(User.class)));
         return currentSession.createQuery(cq).getSingleResult();
     }
 
-    @Override
-    public void deleteById(Long clientId) {
-        currentSession.delete(clientId);
+    public Optional<User> findByUsername(String username) {
+        return currentSession.createQuery("from users where username= :username", User.class)
+                .setParameter("username", username)
+                .uniqueResultOptional();
     }
 
-    @Override
-    public void save(Client client) {
-        currentSession.save(client);
+    public void delete(User user) {
+        currentSession.delete(user);
+    }
+
+
+    public User get(Long userId) {
+        return currentSession.load(User.class, userId);
+    }
+
+
+    public void save(User user) {
+        currentSession.save(user);
     }
 }

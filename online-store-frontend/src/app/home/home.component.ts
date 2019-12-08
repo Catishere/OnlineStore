@@ -1,34 +1,34 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { Client } from '@/_models';
-import { ClientService, AuthenticationService } from '@/_services';
+import { User } from '@/_models';
+import { UserService, AuthenticationService } from '@/_services';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
-    currentClient: Client;
-    clients = [];
+    currentUser: User;
+    users = [];
 
     constructor(
         private authenticationService: AuthenticationService,
-        private clientService: ClientService
+        private userService: UserService
     ) {
-        this.currentClient = this.authenticationService.currentClientValue;
+        this.currentUser = this.authenticationService.currentUserValue;
     }
 
     ngOnInit() {
-        this.loadAllClients();
+        this.loadAllUsers();
     }
 
-    deleteClient(id: number) {
-        this.clientService.delete(id)
+    deleteUser(id: number) {
+        this.userService.delete(id)
             .pipe(first())
-            .subscribe(() => this.loadAllClients());
+            .subscribe(() => this.loadAllUsers());
     }
 
-    private loadAllClients() {
-        this.clientService.getAll()
+    private loadAllUsers() {
+        this.userService.getAll()
             .pipe(first())
-            .subscribe(clients => this.clients = clients);
+            .subscribe(users => this.users = users);
     }
 }
