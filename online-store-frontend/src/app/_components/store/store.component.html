@@ -1,0 +1,9 @@
+﻿<p>Store</p>
+<h3>Products: </h3>
+<ul>
+    <app-store-addproduct></app-store-addproduct>
+    <li *ngFor="let product of products">
+        {{product.name}} ({{product.type}} {{product.price}})
+        - <a (click)="deleteUser(product.id)" class="text-danger">Delete</a>
+    </li>
+</ul>

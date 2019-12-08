@@ -1,6 +1,7 @@
 package com.sap.trashproject.onlinestore.config;
 
 import com.sap.trashproject.onlinestore.security.JwtTokenProvider;
+import com.sap.trashproject.onlinestore.service.ProductService;
 import com.sap.trashproject.onlinestore.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public ProductService productService(){
+        return new ProductService();
+    }
+
+
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
@@ -45,6 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(SecurityConstants.AUTH_LOGIN_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/users").permitAll()
+                .antMatchers(HttpMethod.GET, "/products").permitAll()
+                .antMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                 .antMatchers("/users/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -54,8 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
-        String password = passwordEncoder().encode("steamstore99");
-        auth.inMemoryAuthentication().withUser("thecatishere").password(password).roles("ADMIN");
+        auth.userDetailsService(userDetailsService());
     }
 
     @Bean

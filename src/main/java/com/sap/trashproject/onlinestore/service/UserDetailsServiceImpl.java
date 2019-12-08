@@ -36,12 +36,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return count;
     }
 
-    public void deleteById(Long userId) {
+    public User deleteById(Long userId) {
         userRep.openCurrentSessionWithTransaction();
         User user = userRep.get(userId);
         if (user != null)
             userRep.delete(user);
         userRep.closeCurrentSessionWithTransaction();
+        return user;
     }
     public void save(User user) {
         userRep.openCurrentSessionWithTransaction();

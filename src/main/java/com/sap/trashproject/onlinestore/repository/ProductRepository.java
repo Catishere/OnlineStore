@@ -1,9 +1,9 @@
 package com.sap.trashproject.onlinestore.repository;
 
-import com.sap.trashproject.onlinestore.entity.User;
+import com.sap.trashproject.onlinestore.entity.Product;
+import com.sap.trashproject.onlinestore.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import com.sap.trashproject.onlinestore.util.HibernateUtil;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UserRepository {
+public class ProductRepository {
     private Session currentSession;
     private Transaction currentTransaction;
 
@@ -52,37 +52,37 @@ public class UserRepository {
         this.currentTransaction = currentTransaction;
     }
 
-    public List<User> findAll() {
+    public List<Product> findAll() {
         CriteriaBuilder builder = currentSession.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-        criteria.from(User.class);
+        CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
+        criteria.from(Product.class);
         return currentSession.createQuery(criteria).getResultList();
     }
 
     public Long count() {
         CriteriaBuilder qb = currentSession.getCriteriaBuilder();
         CriteriaQuery<Long> cq = qb.createQuery(Long.class);
-        cq.select(qb.count(cq.from(User.class)));
+        cq.select(qb.count(cq.from(Product.class)));
         return currentSession.createQuery(cq).getSingleResult();
     }
 
-    public Optional<User> findByUsername(String username) {
-        return currentSession.createQuery("from users where username= :username", User.class)
-                .setParameter("username", username)
+    public Optional<Product> findByProductName(String productName) {
+        return currentSession.createQuery("from products where username= :name", Product.class)
+                .setParameter("name", productName)
                 .uniqueResultOptional();
     }
 
-    public void delete(User user) {
-        currentSession.delete(user);
+    public void delete(Product product) {
+        currentSession.delete(product);
     }
 
 
-    public User get(Long userId) {
-        return currentSession.get(User.class, userId);
+    public Product get(Long productId) {
+        return currentSession.get(Product.class, productId);
     }
 
 
-    public void save(User user) {
-        currentSession.save(user);
+    public void save(Product product) {
+        currentSession.save(product);
     }
 }

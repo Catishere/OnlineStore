@@ -2,17 +2,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers';
-
-import { appRoutingModule } from './app.routing';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home';
-import { LoginComponent } from './login';
-import { RegisterComponent } from './register';
-import { AlertComponent } from './_components';
+import { appRoutingModule } from '@/app.routing';
+import { JwtInterceptor, ErrorInterceptor } from '@/_helpers';
+import { AppComponent } from '@/app.component';
+import { HomeComponent } from '@/_components/home';
+import { LoginComponent } from '@/_components/login';
+import { RegisterComponent } from '@/_components/register';
+import { AlertComponent } from '@/_components/alert';
+import {StoreComponent} from "@/_components/store";
+import {ProfileComponent} from "@/_components/profile";
+import {AddProductComponent} from "@/_components/store/addproduct/addproduct.component";
 
 @NgModule({
     imports: [
@@ -26,7 +25,10 @@ import { AlertComponent } from './_components';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        AlertComponent
+        StoreComponent,
+        ProfileComponent,
+        AlertComponent,
+        AddProductComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

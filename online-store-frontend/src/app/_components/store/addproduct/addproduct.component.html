@@ -1,0 +1,31 @@
+﻿<h2>Add Product: </h2>
+<form [formGroup]="addProductForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && field.name.errors }" />
+        <div *ngIf="submitted && field.name.errors" class="invalid-feedback">
+            <div *ngIf="field.name.errors.required">name is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" formControlName="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && field.type.errors }" />
+        <div *ngIf="submitted && field.type.errors" class="invalid-feedback">
+            <div *ngIf="field.type.errors.required">Type is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && field.price.errors }" />
+        <div *ngIf="submitted && field.price.errors" class="invalid-feedback">
+            <div *ngIf="field.price.errors.required">Price is required</div>
+            <div *ngIf="field.price.errors.min">Price cannot be less than 0</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Add Product
+        </button>
+    </div>
+</form>
