@@ -5,7 +5,6 @@ import { first } from 'rxjs/operators';
 
 import { AlertService } from '@/_services';
 import {ProductService} from "@/_services/product.service";
-import {StoreComponent} from "@/_components/store";
 
 @Component({ selector: 'app-store-addproduct', templateUrl: 'addproduct.component.html' })
 export class AddProductComponent implements OnInit {
@@ -19,16 +18,19 @@ export class AddProductComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private productService: ProductService,
-        private alertService: AlertService,
-        private store: StoreComponent
+        private alertService: AlertService
     ) {
     }
 
     ngOnInit() {
+        const URL_REGEXP = /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
+
         this.addProductForm = this.formBuilder.group({
             name: ['', Validators.required],
             type: ['', Validators.required],
-            price: ['', [Validators.required, Validators.min(0)]]
+            price: ['', [Validators.required, Validators.min(0)]],
+            description: ['', [Validators.maxLength(255)]],
+            image: ['', [Validators.pattern(URL_REGEXP)]]
         });
 
         // get return url from route parameters or default to '/'
@@ -56,7 +58,6 @@ export class AddProductComponent implements OnInit {
                 data => {
                     this.alertService.success("Added");
                     this.loading = false;
-                    this.store.loadAllProducts();
                 },
                 error => {
                     this.alertService.error(error);

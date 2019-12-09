@@ -19,4 +19,8 @@ export class UserService {
     delete(id: number) {
         return this.http.delete(`${config.apiUrl}/users/${id}`, {headers: HEADERS});
     }
+
+    update(id: number) {
+        return this.http.put(`${config.apiUrl}/users/${id}`, {headers: HEADERS});
+    }
 }

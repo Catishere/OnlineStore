@@ -51,4 +51,11 @@ public class ProductService {
 
         return product;
     }
+
+    public Product getProductById(Long productId) {
+        productRep.openCurrentSessionWithTransaction();
+        Product product = productRep.get(productId);
+        productRep.closeCurrentSessionWithTransaction();
+        return product;
+    }
 }

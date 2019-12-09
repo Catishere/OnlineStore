@@ -19,4 +19,8 @@ export class ProductService {
     delete(id: number) {
         return this.http.delete(`${config.apiUrl}/products/${id}`, {headers: HEADERS});
     }
+
+    getProductById(id: string) {
+        return this.http.get<Product>(`${config.apiUrl}/products/${id}`, {headers: HEADERS})
+    }
 }

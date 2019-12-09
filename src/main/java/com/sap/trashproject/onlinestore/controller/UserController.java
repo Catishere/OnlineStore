@@ -50,19 +50,18 @@ public class UserController {
     }
 
     @PostMapping("/users/authenticate")
-    public ResponseEntity login(@RequestBody User user) {
+    public User login(@RequestBody User user) {
         try {
             String username = user.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, user.getPassword()));
-
+            User authenticatedUser = userDetailsServiceImpl.loadUserByUsername(username);
             String token = jwtTokenProvider
-                    .createToken(username, userDetailsServiceImpl.loadUserByUsername(username)
+                    .createToken(username, authenticatedUser
                             .getRoles());
 
-            Map<String, String> model = new HashMap<>();
-            model.put("username", username);
-            model.put("token", token);
-            return ResponseEntity.ok(model);
+            authenticatedUser.setToken(token);
+            authenticatedUser.setPassword("");
+            return authenticatedUser;
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }

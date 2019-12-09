@@ -20,6 +20,10 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
+    currentUserHasRole(role: string): boolean {
+        return this.currentUserSubject.value.roles.indexOf(role) >= 0;
+    }
+
     login(username, password) {
         return this.http.post<any>(`${config.apiUrl}/users/authenticate`,
             { username, password }, {headers: HEADERS})

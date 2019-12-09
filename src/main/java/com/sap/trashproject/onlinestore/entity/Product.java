@@ -29,6 +29,12 @@ public class Product {
 
     private Double price;
 
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
     public Long getId() {
         return id;
     }

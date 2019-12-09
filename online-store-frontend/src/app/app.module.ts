@@ -11,7 +11,9 @@ import { RegisterComponent } from '@/_components/register';
 import { AlertComponent } from '@/_components/alert';
 import {StoreComponent} from "@/_components/store";
 import {ProfileComponent} from "@/_components/profile";
-import {AddProductComponent} from "@/_components/store/addproduct/addproduct.component";
+import {AddProductComponent} from "@/_components/admin/addproduct/addproduct.component";
+import {ProductComponent} from "@/_components/store/product/product.component";
+import {ProductPageComponent} from "@/_components/productpage";
 
 @NgModule({
     imports: [
@@ -28,7 +30,9 @@ import {AddProductComponent} from "@/_components/store/addproduct/addproduct.com
         StoreComponent,
         ProfileComponent,
         AlertComponent,
-        AddProductComponent
+        AddProductComponent,
+        ProductComponent,
+        ProductPageComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

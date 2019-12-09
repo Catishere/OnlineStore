@@ -2,3 +2,41 @@
 a {
     cursor: pointer;
 }
+
+.product-tile {
+    width: 180px;
+    height: 190px;
+    background-position: center;
+    background-size: cover;
+    margin: 10px;
+}
+
+.product-overlay {
+    position: absolute;
+    top: 10px;
+    bottom: 0;
+    left: 25px;
+    right: 0;
+    height: 190px;
+    width: 180px;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #111111;
+}
+
+.product-overlay:hover {
+    opacity: 0.8;
+}
+
+.product-overlay-text {
+    color: white;
+    word-break: break-word;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

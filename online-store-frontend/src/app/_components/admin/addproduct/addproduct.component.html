@@ -1,4 +1,4 @@
-﻿<h2>Add Product: </h2>
+﻿<h5>Add Product: </h5>
 <form [formGroup]="addProductForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
     <div class="form-group">
         <label for="name">Name</label>
@@ -20,6 +20,20 @@
         <div *ngIf="submitted && field.price.errors" class="invalid-feedback">
             <div *ngIf="field.price.errors.required">Price is required</div>
             <div *ngIf="field.price.errors.min">Price cannot be less than 0</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && field.description.errors }" />
+        <div *ngIf="submitted && field.description.errors" class="invalid-feedback">
+            <div *ngIf="field.description.errors.min">Description is too long</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input type="text" formControlName="image" class="form-control" [ngClass]="{ 'is-invalid': submitted && field.image.errors }" />
+        <div *ngIf="submitted && field.image.errors" class="invalid-feedback">
+            <div *ngIf="field.image.errors.min">This is not a valid URL</div>
         </div>
     </div>
     <div class="form-group">
