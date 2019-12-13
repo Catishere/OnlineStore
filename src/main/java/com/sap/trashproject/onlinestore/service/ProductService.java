@@ -3,59 +3,51 @@ package com.sap.trashproject.onlinestore.service;
 import com.sap.trashproject.onlinestore.entity.Product;
 import com.sap.trashproject.onlinestore.exception.ProductNotFoundException;
 import com.sap.trashproject.onlinestore.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class ProductService {
 
-    private ProductRepository productRep;
+    private final ProductRepository productRepository;
 
-    public ProductService() {
-        this.productRep = new ProductRepository();
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
+    @Transactional
     public List<Product> findAll() {
-        productRep.openCurrentSessionWithTransaction();
-        List<Product> products =  productRep.findAll();
-        productRep.closeCurrentSessionWithTransaction();
-        return products;
+        return productRepository.findAll();
     }
 
+    @Transactional
     public Long count() {
-        productRep.openCurrentSessionWithTransaction();
-        Long count = productRep.count();
-        productRep.closeCurrentSessionWithTransaction();
-        return count;
+        return productRepository.count();
     }
 
-    public Product deleteById(Long productId) {
-        productRep.openCurrentSessionWithTransaction();
-        Product product = productRep.get(productId);
-        if (product != null)
-            productRep.delete(product);
-        productRep.closeCurrentSessionWithTransaction();
-        return product;
+    @Transactional
+    public void deleteById(Long productId) {
+        productRepository.deleteById(productId);
     }
+
+    @Transactional
     public void save(Product product) {
-        productRep.openCurrentSessionWithTransaction();
-        productRep.save(product);
-        productRep.closeCurrentSessionWithTransaction();
+        productRepository.save(product);
     }
 
+    @Transactional
     public Product loadProductByProductName(String productName) throws ProductNotFoundException {
-        productRep.openCurrentSessionWithTransaction();
-        Product product = productRep.findByProductName(productName)
+        return productRepository.findProductByName(productName)
                 .orElseThrow(() -> new ProductNotFoundException("Product: " + productName + " not found"));
-        productRep.closeCurrentSessionWithTransaction();
-
-        return product;
     }
 
-    public Product getProductById(Long productId) {
-        productRep.openCurrentSessionWithTransaction();
-        Product product = productRep.get(productId);
-        productRep.closeCurrentSessionWithTransaction();
-        return product;
+    @Transactional
+    public Product getProductById(Long productId) throws ProductNotFoundException {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("Product " + productId + " not found"));
     }
 }

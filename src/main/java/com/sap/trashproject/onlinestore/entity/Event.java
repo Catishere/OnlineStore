@@ -4,14 +4,18 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@Entity(name="products")
+@Entity(name="events")
 @Data
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,11 +25,9 @@ public class Product {
     private String name;
 
     @NotEmpty
-    private String type;
-
     private String image;
 
-    private Double price;
-
-    private String description;
+    @OneToMany(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<Product> products = new ArrayList<>();
 }

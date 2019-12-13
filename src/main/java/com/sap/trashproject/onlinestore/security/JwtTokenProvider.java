@@ -2,6 +2,7 @@ package com.sap.trashproject.onlinestore.security;
 
 import com.sap.trashproject.onlinestore.config.SecurityConstants;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,13 +28,13 @@ public class JwtTokenProvider {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    public JwtTokenProvider(UserDetailsService userDetailsService){
+    public JwtTokenProvider(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService){
         this.userDetailsService = userDetailsService;
     }
 
     @PostConstruct
     protected void init() {
-        key = io.jsonwebtoken.security.Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     }
     public String createToken(String username, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(username);

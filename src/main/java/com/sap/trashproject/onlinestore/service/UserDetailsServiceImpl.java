@@ -1,63 +1,59 @@
 package com.sap.trashproject.onlinestore.service;
 
+import com.sap.trashproject.onlinestore.exception.UserNotFoundException;
 import com.sap.trashproject.onlinestore.repository.UserRepository;
 import com.sap.trashproject.onlinestore.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserRepository userRep;
+    private final UserRepository userRepository;
 
-    public UserDetailsServiceImpl() {
-        this.userRep = new UserRepository();
+    @Autowired
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
+    @Transactional
     public List<User> findAll() {
-        userRep.openCurrentSessionWithTransaction();
-        List<User> users =  userRep.findAll();
-        userRep.closeCurrentSessionWithTransaction();
-        return users;
+        return userRepository.findAll();
     }
 
+    @Transactional
     public Long count() {
-        userRep.openCurrentSessionWithTransaction();
-        Long count = userRep.count();
-        userRep.closeCurrentSessionWithTransaction();
-        return count;
+        return userRepository.count();
     }
 
-    public User deleteById(Long userId) {
-        userRep.openCurrentSessionWithTransaction();
-        User user = userRep.get(userId);
-        if (user != null)
-            userRep.delete(user);
-        userRep.closeCurrentSessionWithTransaction();
-        return user;
+    @Transactional
+    public void deleteById(Long userId) {
+        userRepository.deleteById(userId);
     }
+
+    @Transactional
     public void save(User user) {
-        userRep.openCurrentSessionWithTransaction();
-        userRep.save(user);
-        userRep.closeCurrentSessionWithTransaction();
+        userRepository.save(user);
     }
 
     @Override
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        userRep.openCurrentSessionWithTransaction();
-        User user = userRep.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
-        userRep.closeCurrentSessionWithTransaction();
-
+    @Transactional
+    public User loadUserByUsername(String username) {
+        User user =  userRepository.findByUsername(username);
+        System.out.println(user.getFirstName());
         return user;
+    }
+
+    @Transactional
+    public User getUserById(Long userId) throws UserNotFoundException {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User " + userId + " not found"));
     }
 
 }

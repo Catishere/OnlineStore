@@ -1,6 +1,7 @@
 package com.sap.trashproject.onlinestore.controller;
 
 import com.sap.trashproject.onlinestore.entity.Product;
+import com.sap.trashproject.onlinestore.exception.ProductNotFoundException;
 import com.sap.trashproject.onlinestore.security.JwtTokenProvider;
 import com.sap.trashproject.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -26,12 +25,13 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{id}")
-    public Product deleteProduct(@PathVariable( "id" ) Long id) {
-        return productService.deleteById(id);
+    public ResponseEntity deleteProduct(@PathVariable( "id" ) Long id) {
+        productService.deleteById(id);
+        return ResponseEntity.ok("success");
     }
 
     @GetMapping("/products/{id}")
-    public Product getProduct(@PathVariable( "id" ) Long id) {
+    public Product getProduct(@PathVariable( "id" ) Long id) throws ProductNotFoundException {
         return productService.getProductById(id);
     }
     @GetMapping("/products")

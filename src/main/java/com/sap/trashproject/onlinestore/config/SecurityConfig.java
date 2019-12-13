@@ -1,11 +1,11 @@
 package com.sap.trashproject.onlinestore.config;
 
 import com.sap.trashproject.onlinestore.security.JwtTokenProvider;
-import com.sap.trashproject.onlinestore.service.ProductService;
-import com.sap.trashproject.onlinestore.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,27 +14,28 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@EnableJpaRepositories("com.sap.trashproject.onlinestore.repository")
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private JwtTokenProvider jwtTokenProvider;
+    private UserDetailsService userDetailsService;
+
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
-
-    @Bean
-    public UserDetailsServiceImpl userDetailsService(){
-        return new UserDetailsServiceImpl();
+    public void userDetailsService(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
-    @Bean
-    public ProductService productService(){
-        return new ProductService();
+    @Autowired
+    public void jwtTokenProvider(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
     }
-
 
     @Bean
     @Override
@@ -56,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/products/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
+                .antMatchers("/events/**").hasRole("ADMIN")
                 .antMatchers("/users/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -65,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService);
     }
 
     @Bean

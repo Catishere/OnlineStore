@@ -4,7 +4,6 @@ import com.sap.trashproject.onlinestore.entity.User;
 import com.sap.trashproject.onlinestore.security.JwtTokenProvider;
 import com.sap.trashproject.onlinestore.service.UserDetailsServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,8 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -21,20 +18,21 @@ import java.util.List;
 public class UserController {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    JwtTokenProvider jwtTokenProvider;
-
-    public UserController(UserDetailsServiceImpl userDetailsServiceImpl) {
+    public UserController(UserDetailsServiceImpl userDetailsServiceImpl,
+                          AuthenticationManager authenticationManager,
+                          JwtTokenProvider jwtTokenProvider) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @DeleteMapping("/users/{id}")
-    public User deleteUser(@PathVariable( "id" ) Long id) {
-        return userDetailsServiceImpl.deleteById(id);
+    public ResponseEntity deleteUser(@PathVariable( "id" ) Long id) {
+        userDetailsServiceImpl.deleteById(id);
+        return ResponseEntity.ok("success");
     }
 
     @GetMapping("/users")
@@ -59,8 +57,8 @@ public class UserController {
                     .createToken(username, authenticatedUser
                             .getRoles());
 
-            authenticatedUser.setToken(token);
             authenticatedUser.setPassword("");
+            authenticatedUser.setToken(token);
             return authenticatedUser;
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
