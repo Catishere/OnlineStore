@@ -1,21 +1,16 @@
-﻿<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" routerLink="/store">Store</a>
-        <a class="nav-item nav-link" routerLink="/profile">Profile</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+<div igxLayout>
+  <igx-nav-drawer #nav id="project-menu" isOpen="true" [enableGestures]='true' width="280px">
+    <ng-template igxDrawer>
+      <span igxDrawerItem [isHeader]="true">Views</span>
+      <span *ngFor="let route of topNavLinks" igxDrawerItem igxRipple routerLinkActive="igx-nav-drawer__item--active" routerLink="{{route.path}}">{{route.name}}</span>
+    </ng-template>
+  </igx-nav-drawer>
+  <div class="main" igxFlex igxLayout igxLayoutDir="columns">
+    <igx-navbar title="OnlineStore" actionButtonIcon="menu" (onAction)="nav.toggle()">
+      <app-login-bar></app-login-bar>
+    </igx-navbar>
+    <div class="content" igxFlex>
+      <router-outlet></router-outlet>
     </div>
-</nav>
-
-<!-- main app container -->
-<div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-9 offset-sm-1">
-                <alert></alert>
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

@@ -1,0 +1,26 @@
+<form class="input-group-form" id="registrationForm" [formGroup]="registrationForm" (ngSubmit)="tryRegister()">
+  <igx-input-group>
+    <igx-prefix><igx-icon>assignment_ind</igx-icon></igx-prefix>
+    <label igxLabel for="firstName">First Name</label>
+    <input igxInput id="firstName" name="firstName" formControlName="firstName" type="text" />
+  </igx-input-group>
+  <igx-input-group>
+    <igx-prefix><igx-icon>assignment_ind</igx-icon></igx-prefix>
+    <label igxLabel for="lastName">Last Name</label>
+    <input igxInput id="lastName" name="lastName" formControlName="lastName" type="text" />
+  </igx-input-group>
+  <igx-input-group>
+    <igx-prefix><igx-icon>alternate_email</igx-icon></igx-prefix>
+    <label igxLabel for="email">Email</label>
+    <input igxInput id="registerEmail" name="email" formControlName="email" type="text" />
+  </igx-input-group>
+  <igx-input-group>
+    <igx-prefix><igx-icon>lock</igx-icon></igx-prefix>
+    <input igxInput id="registerPassword" name="password" type="password" formControlName="password" />
+    <label igxLabel for="password">Password</label>
+  </igx-input-group>
+  <div>
+    <button igxButton="raised" type="submit" igxRipple [disabled]="!registrationForm.valid">SIGN UP</button>
+    <a (click)="showLoginForm()">Have an account?</a>
+  </div>
+</form>
