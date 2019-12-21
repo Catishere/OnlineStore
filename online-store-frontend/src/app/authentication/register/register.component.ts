@@ -5,6 +5,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { Register } from '../models/register';
+import {UserApiService} from "../../store/services/user-api.service";
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ import { Register } from '../models/register';
 export class RegisterComponent {
   name: string;
   email: string;
+  username: string;
   password: string;
 
   public registrationForm: FormGroup;
@@ -24,11 +26,13 @@ export class RegisterComponent {
   constructor(private authentication: AuthenticationService,
               private fb: FormBuilder,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private userApiService: UserApiService) {
     this.registrationForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.nullValidator],
       email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -36,7 +40,10 @@ export class RegisterComponent {
   async tryRegister() {
     const response = await this.authentication.register(this.registrationForm.value as Register);
     if (!response.error) {
-      this.userService.setCurrentUser(response.user);
+        console.log(response.user.username);
+      const userInfo = await this.userApiService.findByUsername(response.user.username);
+      this.userService.setMerge(response.user, userInfo.user);
+
       this.router.navigate(['/profile']);
       this.registered.emit();
     } else {

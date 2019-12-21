@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="72fc3aad-758b-47b3-9d23-cca73a349185" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../ignite-ui-cli.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../ignite-ui-cli.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/login-bar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-bar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/login-bar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-bar.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/login-bar.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-bar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/login-bar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../models/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../models/login.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../models/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../models/register.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../models/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../profile/profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../providers/auth-provider.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../providers/base-oidc-provider.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../providers/facebook-provider.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../providers/google-provider.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../providers/microsoft-provider.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../providers/providers.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redirect/redirect.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redirect/redirect.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../register/register.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../register/register.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../register/register.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../register/register.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/authentication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../services/authentication.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/external-auth-configs.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/external-auth.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/fake-backend.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/jwt-util.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/jwt.interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/jwt.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/microsoft-keys.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/services.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../environments/environment.prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../../../styles.scss" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\Users\i7\Desktop\OnlineStore\online-store-frontend\src\app\authentication\login-bar\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1VDXuANfLijT7fGLk0SRKaREXJf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path" value="D:/Program Files/nodejs/node" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Background" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="72fc3aad-758b-47b3-9d23-cca73a349185" name="Default Changelist" comment="" />
+      <created>1576788859352</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576788859352</updated>
+      <workItem from="1576788860603" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

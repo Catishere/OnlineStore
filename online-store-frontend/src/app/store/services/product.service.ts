@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '..';
+import {Event, Product} from '..';
 import { environment } from "../../../environments/environment";
 
 @Injectable({
@@ -10,19 +10,30 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<Product[]>(`${environment.apiUrl}/products`, {headers: environment.HEADERS});
+    return this.http.get<Product[]>(`${environment.publicApi}/products`);
   }
 
-  add(product: Product) {
-
-    return this.http.post(`${environment.apiUrl}/products`, product, {headers: environment.HEADERS});
+  async add(product: Product) {
+    let resultProduct: Product;
+    try {
+      resultProduct = await this.http.post<Product>(`${environment.adminApi}/products`, product).toPromise();
+    } catch (e) {
+      console.log(e);
+    }
+    return resultProduct;
   }
 
   delete(id: number) {
-    return this.http.delete(`${environment.apiUrl}/products/${id}`, {headers: environment.HEADERS});
+    return this.http.delete(`${environment.adminApi}/products/${id}`);
   }
 
-  getProductById(id: string) {
-    return this.http.get<Product>(`${environment.apiUrl}/products/${id}`, {headers: environment.HEADERS})
+  async getProductById(id: string) {
+    let resultProduct: Product;
+    try {
+      resultProduct = await this.http.get<Product>(`${environment.publicApi}/products/${id}`).toPromise();
+    } catch (e) {
+      console.log(e);
+    }
+    return resultProduct;
   }
 }

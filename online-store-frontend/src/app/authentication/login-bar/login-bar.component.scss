@@ -1,6 +1,7 @@
 .login-button {
-  height: 3rem;
-  vertical-align: middle;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 igx-drop-down-item {

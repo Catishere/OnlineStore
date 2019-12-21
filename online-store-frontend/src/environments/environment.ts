@@ -3,14 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080',
-  HEADERS: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, GET, OPTIONS, DELETE",
-    "Access-Control-Allow-Headers": "x-requested-with"
-  }
+    production: false,
+    adminApi: '/api/admin',
+    publicApi: '/api/public',
+    userApi: '/api/user',
+    api: '/api'
 };
 
 /*
@@ -21,3 +18,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+

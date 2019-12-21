@@ -5,7 +5,7 @@
         "framework": "angular",
         "projectType": "igx-ts",
         "projectTemplate": "side-nav-auth",
-        "theme": "Default",
+        "theme": "Dark",
         "themePath": "$(themePath)",
         "isBundle": false,
         "bundleFilePath": "",

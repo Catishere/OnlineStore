@@ -4,12 +4,15 @@
     igxButtonBackground="c" igxButtonColor="white" [igxToggleAction]="options">
   <igx-avatar [initials]="userService.initials" [src]="userService.currentUser.picture" [roundShape]="true" size="small" bgColor="white">
   </igx-avatar>
+
+  <div style="margin-left: 5px">{{userService.currentUser.firstName}}</div>
   <igx-icon>keyboard_arrow_down</igx-icon>
 </button>
 
 <igx-drop-down #options (onSelection)="menuSelect($event)">
-  <igx-drop-down-item igxRipple>Profile</igx-drop-down-item>
-  <igx-drop-down-item igxRipple>Log Out</igx-drop-down-item>
+  <ng-container *ngFor="let selection of this.selections">
+    <igx-drop-down-item *ngIf="userService.hasRole('ROLE_USER')" igxRipple>{{selection.label}}</igx-drop-down-item>
+  </ng-container>
 </igx-drop-down>
 
 <app-login-dialog></app-login-dialog>

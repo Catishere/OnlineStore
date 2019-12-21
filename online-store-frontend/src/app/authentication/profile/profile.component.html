@@ -1,3 +1,5 @@
 <h3>
     Hello {{this.userService.currentUser.firstName.toUpperCase()}}, you are now logged in!
 </h3>
+
+<img width="100px" height="100px" [src]="userService.currentUser.picture || 'https://icon-library.net/images/no-image-icon/no-image-icon-5.jpg'">

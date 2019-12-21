@@ -20,7 +20,6 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { LoginBarComponent } from './login-bar.component';
 import { UserService } from '../services/user.service';
 import { AuthModule } from 'angular-auth-oidc-client';
-import { ExternalAuthService } from '../services/external-auth.service';
 
 @Component({
   selector: 'app-login-dialog',
@@ -59,8 +58,7 @@ describe('LoginBarComponent', () => {
       ],
       declarations: [ LoginBarComponent, TestLoginDialogComponent ],
       providers: [
-        { provide: UserService, useClass: TestUserServSpy },
-        { provide: ExternalAuthService, useClass: TestAuthService }
+        { provide: UserService, useClass: TestUserServSpy }
       ]
     })
     .compileComponents();
@@ -117,11 +115,9 @@ describe('LoginBarComponent', () => {
 
   it('should handle user menu items', async () => {
     const userServ = TestBed.get(UserService);
-    const authServ = TestBed.get(ExternalAuthService);
     const router: Router = TestBed.get(Router);
     spyOn(router, 'navigate');
     spyOn(userServ, 'clearCurrentUser');
-    spyOn(authServ, 'logout');
 
     component.igxDropDown.open();
     component.igxDropDown.setSelectedItem(0);
@@ -130,6 +126,5 @@ describe('LoginBarComponent', () => {
     component.igxDropDown.setSelectedItem(1);
     expect(router.navigate).toHaveBeenCalledWith(['/home']);
     expect(userServ.clearCurrentUser).toHaveBeenCalled();
-    expect(authServ.logout).toHaveBeenCalled();
   });
 });

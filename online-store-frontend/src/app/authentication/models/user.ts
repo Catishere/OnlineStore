@@ -2,7 +2,7 @@
 export interface UserJWT {
     // using registered/public claims per https://www.iana.org/assignments/jwt/jwt.xhtml
     exp: number;
-    name: string;
+    username: string;
     firstName: string;
     lastName: string;
     email: string;

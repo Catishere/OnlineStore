@@ -1,0 +1,14 @@
+<div *ngIf="product">
+  <h2>{{this.product.name}}</h2>
+  <img src="{{this.product.image || 'https://icon-library.net/images/no-image-icon/no-image-icon-5.jpg'}}" alt="{{this.product.name}}">
+  <div>
+    Price: {{this.product.price}} euro.
+  </div>
+  <div>
+    Type: {{this.product.type}}
+  </div>
+  <div>
+    Description: {{this.product.description}}
+  </div>
+
+</div>

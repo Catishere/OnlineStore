@@ -11,5 +11,11 @@ D:/Users/i7/Desktop/OnlineStore/src/main/java/hibernate.cfg.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/onlinestore</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="onlinedb" uuid="dccc490c-aebf-49d5-8c1f-c380caad51a5">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:~/onlinedb</jdbc-url>
+    </data-source>
   </component>
 </project>

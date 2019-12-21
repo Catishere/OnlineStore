@@ -1,0 +1,13 @@
+<h3>Products: </h3>
+
+<div  style="width: 90%; margin: auto"
+  igxLayout
+     igxLayoutDir="row"
+     igxLayoutWrap="wrap"
+     igxLayoutJustify="start">
+  <ng-container *ngFor="let product of products">
+      <div class="product">
+        <app-product igxFlex igxFlexGrow="0" [product]="product"></app-product>
+      </div>
+  </ng-container>
+</div>
