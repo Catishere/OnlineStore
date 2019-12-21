@@ -12,12 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    @Autowired
     public UserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -45,9 +43,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public User loadUserByUsername(String username) {
-        User user =  userRepository.findByUsername(username);
-        System.out.println(user.getFirstName());
-        return user;
+        System.out.println(userRepository.findAll().size());
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
     }
 
     @Transactional

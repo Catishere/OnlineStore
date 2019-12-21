@@ -4,10 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.Set;
 
 @Entity(name="products")
 @Data
-@Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +29,7 @@ public class Product {
     private Double price;
 
     private String description;
+
+    @OneToMany(mappedBy = "product")
+    private List<EventProduct> eventAssoc;
 }

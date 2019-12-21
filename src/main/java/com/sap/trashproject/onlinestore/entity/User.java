@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @Entity(name="users")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
@@ -39,16 +38,33 @@ public class User implements UserDetails {
     @Column(name="last_name")
     private String lastName;
 
+    @Column(name="email")
+    private String email;
+
+    @Column(name="picture")
+    private String picture;
+
     @Transient
     private String token;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
     private List<String> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPicture() {
+        return picture;
     }
 
     public String getToken() {

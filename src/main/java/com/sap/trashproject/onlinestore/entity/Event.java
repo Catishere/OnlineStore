@@ -4,10 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity(name="events")
 @Data
@@ -27,7 +24,8 @@ public class Event {
     @NotEmpty
     private String image;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "event")
+    private List<EventProduct> productAssoc;
+
+    private boolean active = false;
 }

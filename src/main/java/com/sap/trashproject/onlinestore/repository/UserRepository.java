@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -18,5 +19,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @SuppressWarnings("unchecked")
     public User save(User user);
 
-    public User findByUsername(String username);
+    public Optional<User> findUserByUsername(String username);
 }

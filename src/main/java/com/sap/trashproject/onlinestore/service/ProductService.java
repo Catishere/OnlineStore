@@ -1,20 +1,18 @@
 package com.sap.trashproject.onlinestore.service;
 
+//import com.sap.trashproject.onlinestore.entity.EventPrice;
 import com.sap.trashproject.onlinestore.entity.Product;
-import com.sap.trashproject.onlinestore.exception.ProductNotFoundException;
-import com.sap.trashproject.onlinestore.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+        import com.sap.trashproject.onlinestore.exception.ProductNotFoundException;
+        import com.sap.trashproject.onlinestore.repository.ProductRepository;
+        import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
 public class ProductService {
 
     private final ProductRepository productRepository;
 
-    @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -35,8 +33,11 @@ public class ProductService {
     }
 
     @Transactional
-    public void save(Product product) {
-        productRepository.save(product);
+    public Product save(Product product) {
+        Optional<Product> ev = productRepository.findProductByName(product.getName());
+        if (!ev.isPresent())
+            productRepository.save(product);
+        return product;
     }
 
     @Transactional
