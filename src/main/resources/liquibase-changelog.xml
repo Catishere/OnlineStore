@@ -1,0 +1,86 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="i7" id="1576633272133-1">
+        <createSequence sequenceName="HIBERNATE_SEQUENCE"/>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-2">
+        <createTable tableName="EVENTS">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_7"/>
+            </column>
+            <column name="ACTIVE" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IMAGE" type="VARCHAR(255)"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-3">
+        <createTable tableName="EVENT_PRODUCT">
+            <column name="EVENT_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_B"/>
+            </column>
+            <column name="PRODUCT_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_B"/>
+            </column>
+            <column name="PRICE" type="DOUBLE(17)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-4">
+        <createTable tableName="PRODUCTS">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_F"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="IMAGE" type="VARCHAR(255)"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="PRICE" type="DOUBLE(17)"/>
+            <column name="TYPE" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-5">
+        <createTable tableName="USERS">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_4"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(255)"/>
+            <column name="FIRST_NAME" type="VARCHAR(255)"/>
+            <column name="LAST_NAME" type="VARCHAR(255)"/>
+            <column name="PASSWORD" type="VARCHAR(255)"/>
+            <column name="PICTURE" type="VARCHAR(255)"/>
+            <column name="USERNAME" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-6">
+        <createTable tableName="USERS_ROLES">
+            <column name="USERS_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLES" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-7">
+        <createIndex indexName="FKJM43YYWAYH25XYBX3PQAL8T0G_INDEX_B" tableName="EVENT_PRODUCT">
+            <column name="PRODUCT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-8">
+        <createIndex indexName="FKML90KEF4W2JY7OXYQV742TSFC_INDEX_A" tableName="USERS_ROLES">
+            <column name="USERS_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-9">
+        <createIndex indexName="FKQXG4E8F1WECXBT1UNOG69JRBD_INDEX_B" tableName="EVENT_PRODUCT">
+            <column name="EVENT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-10">
+        <addForeignKeyConstraint baseColumnNames="PRODUCT_ID" baseTableName="EVENT_PRODUCT" constraintName="FKJM43YYWAYH25XYBX3PQAL8T0G" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="PRODUCTS" validate="true"/>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-11">
+        <addForeignKeyConstraint baseColumnNames="USERS_ID" baseTableName="USERS_ROLES" constraintName="FKML90KEF4W2JY7OXYQV742TSFC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="USERS" validate="true"/>
+    </changeSet>
+    <changeSet author="i7" id="1576633272133-12">
+        <addForeignKeyConstraint baseColumnNames="EVENT_ID" baseTableName="EVENT_PRODUCT" constraintName="FKQXG4E8F1WECXBT1UNOG69JRBD" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="EVENTS" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
