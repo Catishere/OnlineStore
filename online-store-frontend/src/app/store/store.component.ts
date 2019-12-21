@@ -37,15 +37,10 @@ export class StoreComponent implements OnInit {
           console.log(error);
       })
   }
-  loadEventsAndProducts() {
-    forkJoin(
-      this.eventService.getAll(),
-      this.productService.getAll()
-    ).subscribe(([eventsData, productsData]) => {
-      this.events = eventsData;
-      this.products = productsData;
+  async loadEventsAndProducts() {
+      this.events = await this.eventService.getAll().toPromise();
+      this.products = await this.productService.getAll().toPromise();
       this.applyDiscounts();
-    });
   }
   loadAllEvents() {
     this.eventService.getAll()
