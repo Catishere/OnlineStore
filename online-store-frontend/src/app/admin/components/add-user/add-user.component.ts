@@ -14,10 +14,6 @@ export class AddUserComponent implements OnInit {
     public addUserForm: FormGroup;
     public alert_message: string;
     public alert_status: string;
-    public roles = [
-        "ROLE_USER", "ROLE_ADMIN"
-    ];
-    public role: any;
 
     constructor(
         private router: Router, fb: FormBuilder,
@@ -37,6 +33,8 @@ export class AddUserComponent implements OnInit {
     }
 
     async onSubmit() {
+        this.addUserForm.value["roles"] = this.addUserForm.value["roles"].split(",");
+        console.log(this.addUserForm.value);
         let user: User = await this.userService.add(this.addUserForm.value);
         if (user.username == null) {
             this.alert_status = "error";

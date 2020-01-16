@@ -7,11 +7,12 @@ import {
     IgxAvatarModule,
     IgxButtonModule,
     IgxCardModule,
-    IgxDialogModule,
+    IgxDialogModule, IgxInputGroupModule,
     IgxLayoutModule,
     IgxRippleModule
 } from "igniteui-angular";
 import {StoreRoutingModule} from "./store-routing.module";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import {StoreRoutingModule} from "./store-routing.module";
         IgxButtonModule,
         IgxRippleModule,
         IgxAvatarModule,
-        IgxDialogModule
+        IgxDialogModule,
+        IgxInputGroupModule,
+        FormsModule
     ],
   exports: [
     StoreComponent,

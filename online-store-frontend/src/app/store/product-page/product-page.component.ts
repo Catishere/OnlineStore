@@ -12,6 +12,8 @@ import {UserService} from "../../authentication";
 export class ProductPageComponent implements OnInit {
 
     public product: Product;
+    public quantity: number;
+
     constructor(
       private route: ActivatedRoute,
       private router: Router,
@@ -28,6 +30,18 @@ export class ProductPageComponent implements OnInit {
     public onEditDialogOKSelected(event) {
         console.log(this.product.id);
         event.dialog.close();
+    }
+
+    public async onBuyDialogOKSelected(event) {
+        console.log(this.product.id);
+        try {
+            let res = await this.service.buy(this.product.id, this.quantity);
+        } catch (e) {
+            console.log(e);
+        }
+
+        event.dialog.close();
+        location.reload();
     }
 
     public async onDeleteDialogOKSelected(event) {

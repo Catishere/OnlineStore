@@ -2,11 +2,9 @@ package com.sap.trashproject.onlinestore.config;
 
 import com.sap.trashproject.onlinestore.repository.EventRepository;
 import com.sap.trashproject.onlinestore.repository.ProductRepository;
+import com.sap.trashproject.onlinestore.repository.StoreAccountRepository;
 import com.sap.trashproject.onlinestore.repository.UserRepository;
-import com.sap.trashproject.onlinestore.service.EventProductService;
-import com.sap.trashproject.onlinestore.service.EventService;
-import com.sap.trashproject.onlinestore.service.ProductService;
-import com.sap.trashproject.onlinestore.service.UserDetailsServiceImpl;
+import com.sap.trashproject.onlinestore.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +15,16 @@ public class ServiceConfig {
     private EventRepository eventRepository;
     private ProductRepository productRepository;
     private UserRepository userRepository;
+    private StoreAccountRepository storeAccountRepository;
+
+    @Bean
+    public StoreAccountService storeAccountService(StoreAccountRepository storeAccountRepository) {
+        return new StoreAccountService(storeAccountRepository);
+    }
 
     @Bean
     public EventProductService eventProductService(EventRepository eventRepository,
-                                                 ProductRepository productRepository) {
+                                                   ProductRepository productRepository) {
         return new EventProductService(productRepository, eventRepository);
     }
 
@@ -53,6 +57,11 @@ public class ServiceConfig {
     @Autowired
     public void userRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Autowired
+    public void userRepository(StoreAccountRepository storeAccountRepository) {
+        this.storeAccountRepository = storeAccountRepository;
     }
 
 }

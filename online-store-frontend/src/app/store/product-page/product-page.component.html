@@ -1,6 +1,6 @@
 <div *ngIf="product">
     <h2>{{this.product.name}}</h2>
-    <img src="{{this.product.image || 'https://icon-library.net/images/no-image-icon/no-image-icon-5.jpg'}}"
+    <img width="50%" height="50%" src="{{this.product.image || 'https://icon-library.net/images/no-image-icon/no-image-icon-5.jpg'}}"
          alt="{{this.product.name}}">
     <div>
         Price: {{this.product.price}} euro.
@@ -32,6 +32,20 @@
                 rightButtonLabel="OK"
                 (onRightButtonSelect)="onEditDialogOKSelected($event)"
                 message="Are you sure you want to edit ?">
+    </igx-dialog>
+</div>
+<div *ngIf="userService.hasRole('ROLE_USER') && !userService.hasRole('ROLE_ADMIN')">
+    <igx-input-group>
+        <label igxLabel for="qnt">Quantity</label>
+        <input igxInput name="qnt" type="number" [(ngModel)]="this.quantity" />
+    </igx-input-group>
+    <button igxButton igxRipple (click)="buyDialog.open()">Buy</button>
+    <igx-dialog #buyDialog title="Confirmation"
+                leftButtonLabel="Cancel"
+                (onLeftButtonSelect)="buyDialog.close()"
+                rightButtonLabel="OK"
+                (onRightButtonSelect)="onBuyDialogOKSelected($event)"
+                message="Are you sure you want to buy {{quantity}} of product?">
     </igx-dialog>
 </div>
 
