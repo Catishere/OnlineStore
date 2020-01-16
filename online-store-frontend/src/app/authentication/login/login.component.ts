@@ -32,16 +32,18 @@ export class LoginComponent {
     async tryLogin() {
         const response = await this.authentication.login(this.loginForm.value);
         if (!response.error) {
-            this.userService.setMerge(this.userService.currentUser, response.user);
 
-            this.router.navigate(['/profile']);
             this.loginForm.reset();
+            location.reload();
+            this.router.navigate(['/profile']);
             // https://github.com/angular/angular/issues/15741
             Object.keys(this.loginForm.controls).forEach(key => {
                 this.loginForm.controls[key].setErrors(null);
             });
             this.loggedIn.emit();
         } else {
+            this.userService.clearCurrentUser();
+            console.log(response.error);
             this.errormsg = response.error;
         }
 

@@ -17,9 +17,13 @@ export class LoginBarComponent implements OnInit {
     @ViewChild(LoginDialogComponent, {static: true}) loginDialog: LoginDialogComponent;
     @ViewChild(IgxDropDownComponent, {static: true}) igxDropDown: IgxDropDownComponent;
 
-    public selections: LoginSelection[] = [
+    public adminSelections: LoginSelection[] = [
         {label: "Profile", right: "ROLE_USER", route: "/profile"},
         {label: "Admin Panel", right: "ROLE_ADMIN", route: "/admin"},
+        {label: "Log Out", right: "ROLE_USER", route: null}];
+
+    public userSelections: LoginSelection[] = [
+        {label: "Profile", right: "ROLE_USER", route: "/profile"},
         {label: "Log Out", right: "ROLE_USER", route: null}];
 
     constructor(public userService: UserService,
@@ -29,7 +33,6 @@ export class LoginBarComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.filterSelections();
     }
 
     openDialog() {
@@ -37,21 +40,18 @@ export class LoginBarComponent implements OnInit {
     }
 
     async handleLogout() {
-        await this.authService.logout();
         this.router.navigate(['/home']);
         this.userService.clearCurrentUser();
-    }
-
-    filterSelections() {
-        this.selections = this.selections.filter(selection => {
-            return this.userService.currentUser && this.userService.currentUser.roles.indexOf(selection.right) >= 0;
-        });
+        console.log("Logout");
     }
 
     menuSelect(args: ISelectionEventArgs) {
-        this.filterSelections();
-        let route = this.selections[args.newSelection.index].route;
-        console.log(route);
+        let route;
+        if(this.userService.hasRole("ROLE_ADMIN"))
+            route = this.adminSelections[args.newSelection.index].route;
+        else if (this.userService.hasRole("ROLE_USER"))
+            route = this.userSelections[args.newSelection.index].route;
+
         if (route == null)
             this.handleLogout();
         else

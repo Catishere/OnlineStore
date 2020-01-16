@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../models";
 import {ProductService} from "..";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {switchMap} from "rxjs/operators";
+import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from "../../authentication";
 
 @Component({
   selector: 'app-product-page',
@@ -15,7 +15,8 @@ export class ProductPageComponent implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private router: Router,
-      private service: ProductService) { }
+      private service: ProductService,
+      public userService: UserService) { }
 
     async ngOnInit() {
       let id = this.route.snapshot.paramMap.get('id');
@@ -24,4 +25,20 @@ export class ProductPageComponent implements OnInit {
       console.log(this.product.name);
     }
 
+    public onEditDialogOKSelected(event) {
+        console.log(this.product.id);
+        event.dialog.close();
+    }
+
+    public async onDeleteDialogOKSelected(event) {
+        console.log(this.product.id);
+        try {
+            let res = await this.service.delete(this.product.id);
+        } catch (e) {
+            console.log(e);
+        }
+
+        event.dialog.close();
+        this.router.navigate(['/home']);
+    }
 }

@@ -8,8 +8,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { IgxInputGroupModule, IgxButtonModule, IgxRippleModule, IgxIconModule } from 'igniteui-angular';
 
 import { LoginComponent } from './login.component';
-import { ExternalAuthService } from '../services/external-auth.service';
-import { ExternalAuthProvider } from '../services/external-auth-configs';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,7 +28,6 @@ describe('LoginComponent', () => {
         IgxInputGroupModule, IgxButtonModule, IgxIconModule, IgxRippleModule ],
       declarations: [ LoginComponent ],
       providers: [
-        { provide: ExternalAuthService, useValue: extAuthSpy },
         { provide: AuthenticationService, useValue: authSpy },
         { provide: UserService, useValue: userServSpy }
       ]
@@ -79,34 +76,17 @@ describe('LoginComponent', () => {
     expect(window.alert).toHaveBeenCalledWith('Err');
   });
 
-  it('should enable external auth buttons when configured', () => {
-    let activeProvider = ExternalAuthProvider.Facebook;
-    const has = (provider: ExternalAuthProvider) => provider ? provider === activeProvider : true;
-    (extAuthSpy.hasProvider as jasmine.Spy).and.callFake(has);
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('button.facebook'))).toEqual(jasmine.any(DebugElement));
-    expect(fixture.debugElement.query(By.css('button.google'))).toBeNull();
-    expect(fixture.debugElement.query(By.css('button.microsoft'))).toBeNull();
-    activeProvider = ExternalAuthProvider.Google;
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('button.facebook'))).toBeNull();
-    expect(fixture.debugElement.query(By.css('button.google'))).toEqual(jasmine.any(DebugElement));
-    expect(fixture.debugElement.query(By.css('button.microsoft'))).toBeNull();
-  });
 
   it('should call correct external auth login per button', () => {
     (extAuthSpy.hasProvider as jasmine.Spy).and.returnValue(true);
     fixture.detectChanges();
     spyOn(component.loggedIn, 'emit');
     fixture.debugElement.query(By.css('button.facebook')).nativeElement.click();
-    expect(extAuthSpy.login).toHaveBeenCalledWith(ExternalAuthProvider.Facebook);
     expect(component.loggedIn.emit).toHaveBeenCalled();
 
     fixture.debugElement.query(By.css('button.google')).nativeElement.click();
-    expect(extAuthSpy.login).toHaveBeenCalledWith(ExternalAuthProvider.Google);
 
     fixture.debugElement.query(By.css('button.microsoft')).nativeElement.click();
-    expect(extAuthSpy.login).toHaveBeenCalledWith(ExternalAuthProvider.Microsoft);
   });
 
   it('should emit viewChange on "create account" click', () => {

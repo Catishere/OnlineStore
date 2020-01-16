@@ -10,9 +10,9 @@
 </button>
 
 <igx-drop-down #options (onSelection)="menuSelect($event)">
-  <ng-container *ngFor="let selection of this.selections">
-    <igx-drop-down-item *ngIf="userService.hasRole('ROLE_USER')" igxRipple>{{selection.label}}</igx-drop-down-item>
-  </ng-container>
+    <igx-drop-down-item *ngIf="userService.hasRole('ROLE_USER')" igxRipple>Profile</igx-drop-down-item>
+    <igx-drop-down-item *ngIf="userService.hasRole('ROLE_ADMIN')" igxRipple>Admin Panel</igx-drop-down-item>
+    <igx-drop-down-item *ngIf="userService.hasRole('ROLE_USER')" igxRipple>Log Out</igx-drop-down-item>
 </igx-drop-down>
 
 <app-login-dialog></app-login-dialog>

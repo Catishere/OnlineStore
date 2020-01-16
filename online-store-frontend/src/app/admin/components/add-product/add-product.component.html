@@ -1,29 +1,32 @@
 <app-alert [message]="alert_message" [status]="alert_status"></app-alert>
 <form class="input-group-form" [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
-  <h4 class="sample-title">Add product</h4>
+    <h4 class="sample-title">Add product</h4>
 
-  <igx-input-group>
-    <input id="name" igxInput name="name" type="text" formControlName="name"/>
-    <label igxLabel for="name">Name</label>
-  </igx-input-group>
-  <igx-input-group>
-    <input id="type" igxInput name="type" type="text" formControlName="type"/>
-    <label igxLabel for="type">Type</label>
-  </igx-input-group>
-  <igx-input-group>
-    <input id="price" igxInput name="price" type="number" formControlName="price"/>
-    <label igxLabel for="price">Price</label>
-  </igx-input-group>
-  <igx-input-group>
-    <input id="image" igxInput name="image" type="text" formControlName="image"/>
-    <label igxLabel for="image">Image URL</label>
-  </igx-input-group>
-  <igx-input-group>
-    <input id="description" igxInput name="description" type="text" formControlName="description"/>
-    <label igxLabel for="description">Description</label>
-  </igx-input-group>
-
-  <div class="form-button-wrap">
-    <button igxButton="raised" type="submit" igxRipple [disabled]="!addProductForm.valid">Add</button>
-  </div>
+    <igx-input-group>
+        <input id="name" igxInput name="name" type="text" formControlName="name"/>
+        <label igxLabel for="name">Name</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="type" igxInput name="type" type="text" formControlName="type"/>
+        <label igxLabel for="type">Type</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="price" igxInput name="price" type="number" formControlName="price"/>
+        <label igxLabel for="price">Price</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="image" igxInput name="image" type="text" formControlName="image"/>
+        <label igxLabel for="image">Image URL</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="description" igxInput name="description" type="text" formControlName="description"/>
+        <label igxLabel for="description">Description</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="quantity" igxInput name="quantity" type="number" formControlName="quantity"/>
+        <label igxLabel for="quantity">Quantity</label>
+    </igx-input-group>
+    <div class="form-button-wrap">
+        <button igxButton="raised" type="submit" igxRipple [disabled]="!addProductForm.valid">Add</button>
+    </div>
 </form>

@@ -1,14 +1,40 @@
 <div *ngIf="product">
-  <h2>{{this.product.name}}</h2>
-  <img src="{{this.product.image || 'https://icon-library.net/images/no-image-icon/no-image-icon-5.jpg'}}" alt="{{this.product.name}}">
-  <div>
-    Price: {{this.product.price}} euro.
-  </div>
-  <div>
-    Type: {{this.product.type}}
-  </div>
-  <div>
-    Description: {{this.product.description}}
-  </div>
+    <h2>{{this.product.name}}</h2>
+    <img src="{{this.product.image || 'https://icon-library.net/images/no-image-icon/no-image-icon-5.jpg'}}"
+         alt="{{this.product.name}}">
+    <div>
+        Price: {{this.product.price}} euro.
+    </div>
+    <div>
+        Type: {{this.product.type}}
+    </div>
+    <div>
+        Description: {{this.product.description}}
+    </div>
+    <div>
+        Quantity: {{this.product.quantity}}
+    </div>
 
 </div>
+<div *ngIf="this.userService.hasRole('ROLE_ADMIN')">
+    <button igxButton igxRipple (click)="deleteDialog.open()">Delete</button>
+    <button igxButton igxRipple (click)="editDialog.open()">Edit</button>
+    <igx-dialog #deleteDialog title="Confirmation"
+                leftButtonLabel="Cancel"
+                (onLeftButtonSelect)="deleteDialog.close()"
+                rightButtonLabel="OK"
+                (onRightButtonSelect)="onDeleteDialogOKSelected($event)"
+                message="Are you sure you want to delete ?">
+    </igx-dialog>
+    <igx-dialog #editDialog title="Confirmation"
+                leftButtonLabel="Cancel"
+                (onLeftButtonSelect)="editDialog.close()"
+                rightButtonLabel="OK"
+                (onRightButtonSelect)="onEditDialogOKSelected($event)"
+                message="Are you sure you want to edit ?">
+    </igx-dialog>
+</div>
+
+
+<!--(buttonClick)="delete(product.id)-->
+<!--(buttonClick)="edit(product)-->

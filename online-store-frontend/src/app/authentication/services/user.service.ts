@@ -19,9 +19,18 @@ const USER_TOKEN = 'currentUser';
 export class UserService {
     // tslint:disable-next-line:variable-name
     private _currentUser: User;
+    private _token: string;
     /** Current logged in user, if any */
     public get currentUser(): User {
         return this._currentUser;
+    }
+
+    public get token(): string {
+        return this._token;
+    }
+
+    public setToken(token: string) {
+        this._token = token;
     }
 
     /** Initials of the current user, if any */
@@ -59,11 +68,14 @@ export class UserService {
     }
 
     public hasRole(role: string) {
-        return this._currentUser && this._currentUser.roles.indexOf(role) >= 0;
+        return this._currentUser
+            && this._currentUser.roles
+            && this._currentUser.roles.indexOf(role) >= 0;
     }
 
     public setMerge(user1: User, user2: User) {
         user2.token = user1.token;
         this.setCurrentUser(user2);
     }
+
 }

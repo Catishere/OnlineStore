@@ -23,8 +23,8 @@ export class ProductService {
     return resultProduct;
   }
 
-  delete(id: number) {
-    return this.http.delete(`${environment.adminApi}/products/${id}`);
+  async delete(id: number) {
+    return await this.http.delete(`${environment.adminApi}/products/${id}`).toPromise();
   }
 
   async getProductById(id: string) {

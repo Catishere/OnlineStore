@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { User, LoginResult } from '../models/user';
-import { Register } from '../models/register';
+import {LoginResult, User} from '../models/user';
+import {Register} from '../models/register';
 import {environment} from "../../../environments/environment";
 import {UserService} from "./user.service";
 
@@ -17,30 +17,23 @@ export class AuthenticationService {
 
     /** Send basic credentials to login endpoint. */
     public async login(userData: Register): Promise<LoginResult> {
-        return this.loginPost('/users/authenticate', userData);
+        return this.loginPost(environment.userApi + '/authenticate', userData);
     }
 
     /** Send user info to register endpoint. */
     public async register(userData: Register): Promise<LoginResult> {
-        return this.loginPost('/users/register', userData);
+        return this.loginPost(environment.publicApi + '/users/register', userData);
     }
 
     protected async loginPost(endpoint: string, userData: Register): Promise<LoginResult> {
-        let data: User;
-        let token = btoa(userData.username + ":" + userData.password);
-        try {
-            data = await this.http.post<User>(environment.publicApi + endpoint, userData).toPromise();
-        } catch (e) {
-            console.log(e);
+        let data: User = {} as User;
+        data.token = btoa(userData.username + ":" + userData.password);
+        this.userService.setCurrentUser(data);
+        data = await this.http.post<User>(endpoint, userData).toPromise();
+        if (data["status"] === 202)
             return { error: "Wrong Credentials!" };
-        }
-
-        this.userService.setCurrentUser({token: token} as User);
         let user: User = data as User;
+        this.userService.setMerge(this.userService.currentUser, user);
         return { user };
-    }
-
-    public async logout(): Promise<any> {
-        return await this.http.post(`${environment.api}/logout`, {}).toPromise();
     }
 }

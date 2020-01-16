@@ -3,7 +3,14 @@ import { CommonModule } from '@angular/common';
 import {StoreComponent} from "./store.component";
 import {ProductPageComponent} from "./product-page/product-page.component";
 import {ProductComponent} from "./product/product.component";
-import {IgxAvatarModule, IgxButtonModule, IgxCardModule, IgxLayoutModule, IgxRippleModule} from "igniteui-angular";
+import {
+    IgxAvatarModule,
+    IgxButtonModule,
+    IgxCardModule,
+    IgxDialogModule,
+    IgxLayoutModule,
+    IgxRippleModule
+} from "igniteui-angular";
 import {StoreRoutingModule} from "./store-routing.module";
 
 @NgModule({
@@ -12,15 +19,16 @@ import {StoreRoutingModule} from "./store-routing.module";
     ProductPageComponent,
     ProductComponent
   ],
-  imports: [
-    CommonModule,
-    StoreRoutingModule,
-    IgxLayoutModule,
-    IgxCardModule,
-    IgxButtonModule,
-    IgxRippleModule,
-    IgxAvatarModule
-  ],
+    imports: [
+        CommonModule,
+        StoreRoutingModule,
+        IgxLayoutModule,
+        IgxCardModule,
+        IgxButtonModule,
+        IgxRippleModule,
+        IgxAvatarModule,
+        IgxDialogModule
+    ],
   exports: [
     StoreComponent,
     ProductPageComponent,

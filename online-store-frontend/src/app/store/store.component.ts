@@ -27,16 +27,6 @@ export class StoreComponent implements OnInit {
     this.loadEventsAndProducts();
   }
 
-  deleteProduct(id: number) {
-    this.productService.delete(id)
-      .pipe(first())
-      .subscribe(data =>
-      {
-        this.loadAllProducts()
-      }, error => {
-          console.log(error);
-      })
-  }
   async loadEventsAndProducts() {
       this.events = await this.eventService.getAll().toPromise();
       this.products = await this.productService.getAll().toPromise();

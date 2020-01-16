@@ -1,0 +1,36 @@
+<app-alert [message]="alert_message" [status]="alert_status"></app-alert>
+<form class="input-group-form" [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+    <h4 class="sample-title">Add product</h4>
+
+    <igx-input-group>
+        <input id="username" igxInput name="username" type="text" formControlName="username"/>
+        <label igxLabel for="username">Username</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="password" igxInput name="password" type="password" formControlName="password"/>
+        <label igxLabel for="password">Password</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="email" igxInput name="email" type="text" formControlName="email"/>
+        <label igxLabel for="email">Email</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="picture" igxInput name="picture" type="text" formControlName="picture"/>
+        <label igxLabel for="picture">Picture</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="firstName" igxInput name="firstName" type="text" formControlName="firstName"/>
+        <label igxLabel for="firstName">First Name</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="lastName" igxInput name="lastName" type="text" formControlName="lastName"/>
+        <label igxLabel for="lastName">Last Name</label>
+    </igx-input-group>
+    <igx-input-group>
+        <input id="role" igxInput name="role" type="text" formControlName="role"/>
+        <label igxLabel for="role">Role</label>
+    </igx-input-group>
+    <div class="form-button-wrap">
+        <button igxButton="raised" type="submit" igxRipple [disabled]="!addUserForm.valid">Add</button>
+    </div>
+</form>

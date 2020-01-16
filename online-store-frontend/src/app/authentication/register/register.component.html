@@ -1,4 +1,5 @@
 <form class="input-group-form" id="registrationForm" [formGroup]="registrationForm" (ngSubmit)="tryRegister()">
+    <app-alert *ngIf="errormsg" [status]="'error'" [message]="errormsg"></app-alert>
   <igx-input-group>
     <igx-prefix><igx-icon>assignment_ind</igx-icon></igx-prefix>
     <label igxLabel for="firstName">First Name</label>
