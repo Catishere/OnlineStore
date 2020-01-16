@@ -30,6 +30,8 @@ public class Product {
 
     private String description;
 
+    private int quantity;
+
     @OneToMany(mappedBy = "product")
     private List<EventProduct> eventAssoc;
 }

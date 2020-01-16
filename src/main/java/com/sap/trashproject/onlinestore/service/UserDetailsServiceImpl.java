@@ -43,7 +43,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public User loadUserByUsername(String username) {
-        System.out.println(userRepository.findAll().size());
         return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
     }

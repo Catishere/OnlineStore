@@ -1,9 +1,9 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <changeSet author="i7" id="1576633272133-1">
+    <changeSet author="i7" id="1579184597939-1">
         <createSequence sequenceName="HIBERNATE_SEQUENCE"/>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-2">
+    <changeSet author="i7" id="1579184597939-2">
         <createTable tableName="EVENTS">
             <column name="ID" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="CONSTRAINT_7"/>
@@ -15,7 +15,7 @@
             <column name="NAME" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-3">
+    <changeSet author="i7" id="1579184597939-3">
         <createTable tableName="EVENT_PRODUCT">
             <column name="EVENT_ID" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="CONSTRAINT_B"/>
@@ -26,7 +26,7 @@
             <column name="PRICE" type="DOUBLE(17)"/>
         </createTable>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-4">
+    <changeSet author="i7" id="1579184597939-4">
         <createTable tableName="PRODUCTS">
             <column name="ID" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="CONSTRAINT_F"/>
@@ -36,9 +36,48 @@
             <column name="NAME" type="VARCHAR(255)"/>
             <column name="PRICE" type="DOUBLE(17)"/>
             <column name="TYPE" type="VARCHAR(255)"/>
+            <column name="QUANTITY" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-5">
+    <changeSet author="i7" id="1579184597939-5">
+        <createTable tableName="SPRING_SESSION">
+            <column name="PRIMARY_ID" type="CHAR(36)">
+                <constraints primaryKey="true" primaryKeyName="SPRING_SESSION_PK"/>
+            </column>
+            <column name="SESSION_ID" type="CHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATION_TIME" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_ACCESS_TIME" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MAX_INACTIVE_INTERVAL" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXPIRY_TIME" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRINCIPAL_NAME" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="i7" id="1579184597939-6">
+        <createTable tableName="SPRING_SESSION_ATTRIBUTES">
+            <column name="SESSION_PRIMARY_ID" type="CHAR(36)">
+                <constraints primaryKey="true" primaryKeyName="SPRING_SESSION_ATTRIBUTES_PK"/>
+            </column>
+            <column name="ATTRIBUTE_NAME" type="VARCHAR(200)">
+                <constraints primaryKey="true" primaryKeyName="SPRING_SESSION_ATTRIBUTES_PK"/>
+            </column>
+            <column name="ATTRIBUTE_BYTES" type="VARBINARY(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="i7" id="1579184597939-7">
         <createTable tableName="USERS">
             <column name="ID" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="CONSTRAINT_4"/>
@@ -51,7 +90,7 @@
             <column name="USERNAME" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-6">
+    <changeSet author="i7" id="1579184597939-8">
         <createTable tableName="USERS_ROLES">
             <column name="USERS_ID" type="BIGINT">
                 <constraints nullable="false"/>
@@ -59,28 +98,28 @@
             <column name="ROLES" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-7">
+    <changeSet author="i7" id="1579184597939-9">
         <createIndex indexName="FKJM43YYWAYH25XYBX3PQAL8T0G_INDEX_B" tableName="EVENT_PRODUCT">
             <column name="PRODUCT_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-8">
+    <changeSet author="i7" id="1579184597939-10">
         <createIndex indexName="FKML90KEF4W2JY7OXYQV742TSFC_INDEX_A" tableName="USERS_ROLES">
             <column name="USERS_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-9">
+    <changeSet author="i7" id="1579184597939-11">
         <createIndex indexName="FKQXG4E8F1WECXBT1UNOG69JRBD_INDEX_B" tableName="EVENT_PRODUCT">
             <column name="EVENT_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-10">
+    <changeSet author="i7" id="1579184597939-12">
         <addForeignKeyConstraint baseColumnNames="PRODUCT_ID" baseTableName="EVENT_PRODUCT" constraintName="FKJM43YYWAYH25XYBX3PQAL8T0G" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="PRODUCTS" validate="true"/>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-11">
+    <changeSet author="i7" id="1579184597939-13">
         <addForeignKeyConstraint baseColumnNames="USERS_ID" baseTableName="USERS_ROLES" constraintName="FKML90KEF4W2JY7OXYQV742TSFC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="USERS" validate="true"/>
     </changeSet>
-    <changeSet author="i7" id="1576633272133-12">
+    <changeSet author="i7" id="1579184597939-14">
         <addForeignKeyConstraint baseColumnNames="EVENT_ID" baseTableName="EVENT_PRODUCT" constraintName="FKQXG4E8F1WECXBT1UNOG69JRBD" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="EVENTS" validate="true"/>
     </changeSet>
 </databaseChangeLog>

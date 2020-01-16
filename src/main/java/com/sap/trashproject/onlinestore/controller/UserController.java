@@ -4,11 +4,15 @@ import com.sap.trashproject.onlinestore.entity.User;
 import com.sap.trashproject.onlinestore.service.UserDetailsServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -42,21 +46,41 @@ public class UserController {
         return user;
     }
 
+    @PostMapping("/admin/users")
+    public User addUser(@RequestBody User user) {
+        String username = user.getUsername();
+        System.out.println(username);
+        user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+        User userDb;
+        try {
+            userDb = userDetailsServiceImpl.loadUserByUsername(username);
+        } catch (UsernameNotFoundException e) {
+            userDetailsServiceImpl.save(user);
+            user.setPassword("");
+            return user;
+        }
+        userDb.setUsername(null);
+        return userDb;
+    }
+
     @PostMapping("/public/users/register")
     public User registerUser(@RequestBody User user) {
         String username = user.getUsername();
         System.out.println(username);
         user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
-        User userDb = userDetailsServiceImpl.loadUserByUsername(username);
-        if (userDb != null)
-            return userDb;
-        user.getRoles().add("ROLE_USER");
-        userDetailsServiceImpl.save(user);
-        user.setPassword("");
-        return user;
+        User userDb;
+        try {
+            userDb = userDetailsServiceImpl.loadUserByUsername(username);
+        } catch (UsernameNotFoundException e) {
+            user.getRoles().add("ROLE_USER");
+            userDetailsServiceImpl.save(user);
+            user.setPassword("");
+            return user;
+        }
+        return userDb;
     }
 
-    @PostMapping("/public/users/authenticate")
+    @PostMapping("/user/authenticate")
     public User login(@RequestBody User user) {
         User userDb = userDetailsServiceImpl.loadUserByUsername(user.getUsername());
         if (userDb != null)
